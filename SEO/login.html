@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+  <div class="w-full max-w-xs p-8 bg-white shadow-md rounded-lg">
+    <h2 class="text-center text-2xl font-bold text-[#202b5b] mb-4">Login</h2>
+
+    <!-- Formulário de login -->
+    <form id="loginForm" action="#" method="POST" onsubmit="return handleLogin(event)">
+      <div class="mb-4">
+        <label for="username" class="block text-gray-700">Usuário</label>
+        <input type="text" id="username" name="username" class="w-full p-2 border border-gray-300 rounded-md" required>
+      </div>
+
+      <div class="mb-6 relative">
+        <label for="password" class="block text-gray-700">Senha</label>
+        <input type="password" id="password" name="password" class="w-full p-2 border border-gray-300 rounded-md" required>
+        
+        <!-- Botão para alternar a visibilidade da senha -->
+        <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 px-4 py-2 text-gray-500 hover:text-gray-700">
+          <i id="eye-icon" class="fas fa-eye"></i> <!-- Ícone de olho -->
+        </button>
+
+        <!-- Mensagem de erro para senha inválida -->
+        <span id="error-message" class="text-red-500 text-sm mt-2 hidden">A senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um caractere especial.</span>
+      </div>
+
+      <button type="submit" class="w-full bg-[#202b5b] text-[#e8b663] py-4 rounded-md">Entrar</button>
+    </form>
+  </div>
+
+  <script>
+    // Função para validar a senha
+    function validatePassword(password) {
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+      return passwordRegex.test(password);
+    }
+
+    // Função para tratar o login
+    function handleLogin(event) {
+      event.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('error-message');
+
+      if (validatePassword(password)) {
+        window.location.href = 'index.html';
+      } else {
+        errorMessage.classList.remove('hidden');
+      }
+    }
+
+    // Função para alternar a visibilidade da senha
+    function togglePasswordVisibility() {
+      const passwordField = document.getElementById('password');
+      const eyeIcon = document.getElementById('eye-icon');
+
+      if (passwordField.type === "password") {
+        passwordField.type = "text"; // Torna a senha visível
+        eyeIcon.classList.remove("fa-eye"); // Remove o ícone de olho
+        eyeIcon.classList.add("fa-eye-slash"); // Adiciona o ícone de olho cortado
+      } else {
+        passwordField.type = "password"; // Torna a senha oculta
+        eyeIcon.classList.remove("fa-eye-slash"); // Remove o ícone de olho cortado
+        eyeIcon.classList.add("fa-eye"); // Adiciona o ícone de olho
+      }
+    }
+  </script>
+
+  <!-- Ícones do FontAwesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Principal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Estilo das tabelas */
+    #pessoasTable, #turmaTable {
+      position: absolute;
+      top: 50%; 
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%; /* Ajustado para telas menores */
+      z-index: 20;
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 h-screen flex">
+
+  <!-- Barra lateral -->
+  <aside class="bg-[#202b5b] w-1/6 lg:w-1/5 md:w-1/4 sm:w-2/5 h-full p-4 shadow-2xl hidden md:flex flex-col justify-between">
+    <div>
+      <div class="flex items-center space-x-4 mb-6">
+        <div class="w-16 h-16 rounded-full overflow-hidden bg-gray-300 flex items-center justify-center">
+          <img alt="Foto de perfil" class="w-full h-full object-cover hidden">
+          <i class="fas fa-user w-8 h-8 text-[#e8b663]"></i>
+        </div>
+        <span class="text-[#e8b663] font-bold text-sm lg:text-lg">Nome do Usuário</span>
+      </div>
+
+      <nav class="space-y-4">
+        <a href="#" class="block text-left hover:text-[#b88b3d] text-[#e8b663] font-bold py-2 px-4 flex items-center space-x-2">
+          <img src="imagens/instituicao.png" alt="instituicao" class="w-7 h-7">
+          <span class="text-sm lg:text-base">INSTITUIÇÃO</span>
+        </a>
+        <a href="#" id="turmabtn" class="block text-left hover:text-[#b88b3d] text-[#e8b663] font-bold py-2 px-4 flex items-center space-x-2">
+          <img src="imagens/turma.png" alt="turma" class="w-7 h-7">
+          <span class="text-sm lg:text-base">Turma</span>
+        </a>
+        <a href="#" id="pessoasBtn" class="block text-left hover:text-[#b88b3d] text-[#e8b663] font-bold py-2 px-4 flex items-center space-x-2">
+          <img src="imagens/pessoas.png" alt="pessoas" class="w-7 h-7">
+          <span class="text-sm lg:text-base">Pessoas</span>
+        </a>
+        <a href="#" class="block text-left hover:text-[#b88b3d] text-[#e8b663] font-bold py-2 px-4 flex items-center space-x-2">
+          <img src="imagens/user-icon.png" alt="usuario" class="w-7 h-7">
+          <span class="text-sm lg:text-base">Users</span>
+        </a>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- Barra lateral móvel -->
+  <button class="md:hidden fixed top-4 left-4 bg-[#202b5b] text-[#e8b663] p-2 rounded shadow z-30" id="menuBtn">
+    ☰ Menu
+  </button>
+  <aside id="mobileMenu" class="fixed top-0 left-0 w-2/3 h-full bg-[#202b5b] p-4 shadow-2xl z-40 transform -translate-x-full transition-transform duration-300 flex flex-col">
+    <button id="closeMenuBtn" class="text-[#e8b663] text-2xl ml-auto p-2 rounded hover:text-[#b88b3d]">
+      ✕
+    </button>
+    <nav class="space-y-4 mt-4">
+      <a href="#" class="block text-left hover:text-[#b88b3d] text-[#e8b663] font-bold py-2 px-4">INSTITUIÇÃO</a>
+      <a href="#" id="turmabtn" class="block text-left hover:text-[#b88b3d] text-[#e8b663] font-bold py-2 px-4">Turma</a>
+      <a href="#" id="pessoasBtn" class="block text-left hover:text-[#b88b3d] text-[#e8b663] font-bold py-2 px-4">Pessoas</a>
+      <a href="#" class="block text-left hover:text-[#b88b3d] text-[#e8b663] font-bold py-2 px-4">Users</a>
+    </nav>
+  </aside>
+
+  <!-- Conteúdo principal -->
+  <main class="flex-1 flex flex-col items-center justify-center bg-white relative p-4">
+    <div class="flex flex-col items-center space-y-4 text-center">
+      <h1 class="text-5xl lg:text-9xl font-extrabold text-[#202b5b]">SEO</h1>
+      <p class="text-[#202b5b] text-sm lg:text-lg">SISTEMA EDUCACIONAL ORGANIZACIONAL</p>
+    </div>
+
+    <!-- Tabela de pessoas -->
+
+    <div id="pessoasTable" class="bg-gray-100 shadow-lg p-10 h-[800px] rounded-lg w-full max-w-7x1 relative flex flex-col">
+
+      <button onclick="togglePessoasTable()" class="absolute top-4 right-4 text-[#e8b663] font-bold hover:text-[#b88b3d] text-3xl">
+        <img src="imagens/btn-voltar.png" alt="Voltar" class="w-10 h-10">
+      </button>
+      
+      
+      <h2 class="text-2xl font-bold text-[#202b5b] mb-4">Tabela de Pessoas</h2> 
+      <div class="flex-grow overflow-auto">
+        <table class="w-full table-auto">
+          <thead>
+            <tr class="bg-[#202b5b] text-[#e8b663]">
+              <th class="px-4 py-2 text-center">Nome</th>
+              <th class="px-4 py-2 text-center">Idade</th>
+              <th class="px-4 py-2 text-center">Perfil</th>         
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-t">
+              <td class="px-4 py-2 text-center">João Silva</td>
+              <td class="px-4 py-2 text-center">22</td>
+              <td class="px-4 py-2 text-center">Aluno</td>
+            </tr>
+            <tr class="border-t">
+              <td class="px-4 py-2 text-center">Maria Oliveira</td>
+              <td class="px-4 py-2 text-center">41</td>
+              <td class="px-4 py-2 text-center">Professor</td>
+            </tr>
+            <tr class="border-t">
+              <td class="px-4 py-2 text-center">Carlos Souza</td>
+              <td class="px-4 py-2 text-center">33</td>
+              <td class="px-4 py-2 text-center">Responsavel</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- nova pessoa -->
+
+        <div id="addPersonForm" style="display: none;" class="fixed inset-0 flex items-center justify-center z-30">
+          <div class="bg-gray-100 rounded-lg shadow-lg p-6 w-full h-full flex flex-col relative">
+            
+            <button id="backPersonbtn"  onclick="toggleAddPersonForm()" class="absolute top-4 right-4">
+              <img src="imagens/btn-voltar.png" alt="Voltar" class="w-10 h-10">
+            </button>
+            
+
+            <!-- Cabeçalho com abas -->
+            <div class="grid grid-cols-3 bg-[#202b5b] text-[#e8b663] font-bold p-2 rounded-t mb-4 mt-10" id="tabsSection">
+              <button id="alunoBtn" class="tab-button px-4 py-2">ALUNO</button>
+              <button id="responsaveisBtn" class="tab-button px-4 py-2">RESPONSÁVEIS</button>
+              <button id="documentosBtn" class="tab-button px-4 py-2">DOCUMENTOS</button>
+            </div>
+
+            <div id="dadosaluno">
+              <form class="flex-grow flex flex-col">
+
+                <!-- Linha com foto e campos -->
+
+                <div class="flex gap-4 mb-4">
+                  
+                  <!-- Foto -->
+                  <div class="w-24 h-24 bg-gray-400 rounded-full flex items-center justify-center">
+                    <span class="text-[#202b5b]">Foto</span>
+                  </div>
+                  <div class="flex gap-2 my-4">
+                    <div class="bg-[#F44336] text-white px-4 py-2 font-bold rounded shadow">ADVERTÊNCIA</div>
+                    <div class="bg-[#FFD700] text-black px-4 py-2 font-bold rounded shadow">LEMBRETE</div>
+                  </div>
+                </div>
+          
+                <!-- Campos do aluno -->
+                <div class="grid grid-cols-3 grid-rows-5 gap-4 mb-4">
+
+                  <div>
+                    <label for="dataMatricula" class="block text-[#202b5b] font-bold">Data de Matrícula:</label>
+                    <input type="date" id="dataMatricula" name="dataMatricula" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-[#e8b663]">
+                  </div>
+                  
+
+                  <div>
+                    <label for="anoletivo" class="block text-[#202b5b] font-bold">Ano letivo:</label>
+                    <input type="" id="anoletivo" name="anoletivo" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-[#e8b663]">
+                  </div>                  
+
+                  <div>
+                    <label for="turno" class="block text-[#202b5b] font-bold">Turno:</label>
+                    <select id="turno" name="turno" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-[#e8b663]">
+                      <option value="Matutino">Matutino</option>
+                      <option value="Vespertino">Vespertino</option>
+                      <option value="Noturno">Noturno</option>
+                    </select>
+                  </div>
+
+                  <div class="col-span-3">
+                    <label class="block text-[#202b5b] font-bold">Aluno(a):</label>
+                    <input type="text" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-[#e8b663]">
+                  </div>
+                  
+                  <div>
+                    <label for="dataNascimento" class="block text-[#202b5b] font-bold">Data de Nascimento:</label>
+                    <input type="date" id="dataNascimento" name="dataNascimento" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-[#e8b663]">
+                  </div>
+                  
+                  <div>
+                    <label class="block text-[#202b5b] font-bold">Naturalidade:</label>
+                    <input type="text" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-[#e8b663]">
+                  </div>
+
+                  <div>
+                    <label class="block text-[#202b5b] font-bold">Matrícula:</label>
+                    <input type="text" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-[#e8b663]">
+                  </div>
+                  
+                  <div>
+                    <label for="cor" class="block text-[#202b5b] font-bold">Cor:</label>
+                    <select id="cor" name="cor" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-[#e8b663]">
+                      <option value="branca">Branca</option>
+                      <option value="preta">Preta</option>
+                      <option value="parda">Parda</option>
+                      <option value="amarela">Amarela</option>
+                      <option value="indigena">Indígena</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="sexo" class="block text-[#202b5b] font-bold">Sexo:</label>
+                    <select id="sexo" name="sexo" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-[#e8b663]">
+                      <option value="branca">Masculino</option>
+                      <option value="preta">Feminino</option>
+                     
+                    </select>
+                  </div>
+                  
+                </div>
+
+              </form>
+            </div>
+
+            <div id="dadosresponsaveis" class="tab-content hidden">
+
+              <!-- Conteúdo da seção Responsáveis -->
+
+              <form class="flex-grow flex flex-col">
+
+                <!-- Exemplo de campos para os responsáveis -->
+                <div class="grid grid-cols-3 grid-rows-8 gap-4 mb-4">
+
+                  <div class="col-span-3">
+                    <label class="block text-[#202b5b] font-bold">Nome do Responsável:</label>
+                    <input type="text" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-[#e8b663]">
+                  </div>
+
+                  <div>
+                    <label class="block text-[#202b5b] font-bold">Parentesco:</label>
+                    <input type="text" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-[#e8b663]">
+                  </div>
+
+                  <div>
+                    <label class="block text-[#202b5b] font-bold">Telefone:</label>
+                    <input type="tel" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-[#e8b663]">
+                  </div>
+
+                  <div class="col-span-3">
+                    <label class="block text-[#202b5b] font-bold">Endereço:</label>
+                    <input class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-[#e8b663]">
+                  </div>
+
+                  <div>
+                    <label class="block text-[#202b5b] font-bold">Qd:</label>
+                    <input class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-[#e8b663]">
+                  </div>
+                  
+                  <div>
+                    <label class="block text-[#202b5b] font-bold">Lt:</label>
+                    <input class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-[#e8b663]">
+                  </div>
+
+                  <div>
+                    <label class="block text-[#202b5b] font-bold">Bairro:</label>
+                    <input class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-[#e8b663]">
+                  </div>
+
+                  <div>
+                    <label class="block text-[#202b5b] font-bold">Cidade:</label>
+                    <input  class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-[#e8b663]">
+                  </div>
+
+                </div>
+              </form>
+
+            </div>
+
+            <div id="dadosdocumentos" class="tab-content hidden">
+
+              <!-- Conteúdo da seção Documentos -->
+
+              <form class="flex-grow flex flex-col">
+
+                <div class="grid grid-cols-3 gap-4 mb-4">
+                  <div>
+                    <label class="block text-[#202b5b] font-bold">RG:</label>
+                    <input type="text" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-[#e8b663]">
+                  </div>
+                  <div>
+                    <label class="block text-[#202b5b] font-bold">CPF:</label>
+                    <input type="text" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-[#e8b663]">
+                  </div>
+                  <div>
+                    <label class="block text-[#202b5b] font-bold">Certidão de Nascimento:</label>
+                    <input type="text" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-[#e8b663]">
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div class="flex justify-center gap-4 mt-auto">
+              <button type="button" class="bg-[#4CAF50] text-white font-bold py-2 px-4 rounded hover:bg-[#388E3C] flex items-center gap-2">
+                <img src="imagens/salvar-icon.png" alt="Salvar" class="w-5 h-5"> SALVAR
+              </button>
+              <button type="button" class="bg-[#F44336] text-white font-bold py-2 px-4 rounded hover:bg-[#D32F2F] flex items-center gap-2">
+                <img src="imagens/excluir-icon.png" alt="Excluir" class="w-5 h-5"> EXCLUIR
+              </button>
+            </div>
+
+          </div>
+        </div>
+        
+      </div>
+    
+      <!-- Botão de adicionar pessoa -->
+      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+        <button id ='addPersonBtn' onclick="toggleAddPersonForm()" class="bg-[#e8b663] text-white font-bold py-2 px-4 rounded hover:bg-[#b88b3d]">
+          Adicionar Pessoa
+        </button>
+      </div>
+    </div>
+      
+    </div>
+
+
+
+
+    <!-- Tabela de Turmas -->
+
+    <div id="turmaTable" class="bg-gray-100 shadow-lg p-10 h-[800px] rounded-lg w-full max-w-7x1 relative">
+
+      <!-- Botão de voltar -->
+
+      <button onclick="toggleTurmaTable()" class="absolute top-4 right-4 text-[#e8b663] font-bold hover:text-[#b88b3d] text-3xl">
+        <img src="imagens/btn-voltar.png" alt="Voltar" class="w-10 h-10">
+      </button>
+
+      <h2 class="text-2xl font-bold text-[#202b5b] mb-4">Tabela de Turmas</h2>
+      <table class="w-full table-auto">
+        <thead>
+          <tr class="bg-[#202b5b] text-[#e8b663]">
+            <th class="px-4 py-2 text-center">Serie</th>
+            <th class="px-4 py-2 text-center">Turma</th>
+            <th class="px-4 py-2 text-center">Professor</th>
+            <th class="px-4 py-2 text-center">Turno</th>     
+            <th class="px-4 py-2 text-center">Qnt. Alunos</th>     
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-t">
+            <td class="px-4 py-2 text-center">2°</td>
+            <td class="px-4 py-2 text-center">B</td>
+            <td class="px-4 py-2 text-center">Augusto</td>
+            <td class="px-4 py-2 text-center">Matutino</td>
+            <td class="px-4 py-2 text-center">22</td>
+          </tr>
+          <tr class="border-t">
+            <td class="px-4 py-2 text-center">3°</td>
+            <td class="px-4 py-2 text-center">C</td>
+            <td class="px-4 py-2 text-center">Roberto</td>
+            <td class="px-4 py-2 text-center">Verspertino</td>
+            <td class="px-4 py-2 text-center">21</td>
+          </tr>
+          <tr class="border-t">
+            <td class="px-4 py-2 text-center">4°</td>
+            <td class="px-4 py-2 text-center">A</td>
+            <td class="px-4 py-2 text-center">Eduarda</td>
+            <td class="px-4 py-2 text-center">Matutino</td>
+            <td class="px-4 py-2 text-center">25</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="scripts.js"></script>
+
+
+</body>
+</html>

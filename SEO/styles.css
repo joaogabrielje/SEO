@@ -1,0 +1,34 @@
+/* Estilo das tabelas */
+#pessoasTable, #turmaTable {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    z-index: 20;
+    display: none;
+  }
+  
+  /* Estilo dos links da barra lateral */
+  .nav-link {
+    display: block;
+    text-align: left;
+    color: #e8b663;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+  }
+  
+  .nav-link:hover {
+    color: #b88b3d;
+  }
+  
+  .nav-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+  
